@@ -1,6 +1,6 @@
 #include"Vect.h"
 
-
+const int NUMBER_OF_LINES = 40;
 
 Vect::Vect(double x0, double y0, const vector<double> &direction){
     std::vector<double> dir = normalise(direction)*EPS;
@@ -38,15 +38,14 @@ void Draw_Force_Lines(const vector<shared_ptr<Particle>> &particles, sf::RenderW
     for(const auto &p: particles){
         double x0 = p->pos_x;
         double y0 = p->pos_y;
-        Vect dir[8] = {Vect(x0, y0, {-1, 0}),
-                       Vect(x0, y0, {1, 0}),
-                       Vect(x0, y0, {0, 1}),
-                       Vect(x0, y0, {0, -1}),
-                       Vect(x0, y0, {-0.5, -0.5}),
-                       Vect(x0, y0, {0.5, 0.5}),
-                       Vect(x0, y0, {-0.5, 0.5}),
-                       Vect(x0, y0, {0.5, -0.5})};
-        for(int i = 0; i < 8; i++)
+        vector<Vect> dir;
+        double corner = 360/NUMBER_OF_LINES;
+        for(int i = 0; i < NUMBER_OF_LINES; i++)
+        {
+            dir.push_back(Vect(x0, y0, {cos(corner*i), sin(corner*i)}));
+        }
+
+        for(int i = 0; i < NUMBER_OF_LINES; i++)
         {
             dir[i].Draw(window);
             x0 = (dir[i]).xe;
