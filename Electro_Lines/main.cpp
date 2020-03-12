@@ -25,13 +25,13 @@ double Vect::EPS = 1.0;
 int main() {
     sf::RenderWindow window(sf::VideoMode(2000, 2000), "SFML window");
 
-    vector<shared_ptr<Particle>> particles = {make_shared<Particle>(300.0, 400.0, CHARGE_VAL),
+    vector<shared_ptr<Particle>> particles = {make_shared<Particle>(400.0, 400.0, CHARGE_VAL),
                                               make_shared<Particle>(950.0, 700.0, CHARGE_VAL),
                                               make_shared<Particle>(400.0, 100.0, CHARGE_VAL),
-                                              make_shared<Particle>(700.0, 250.0, CHARGE_VAL),
-                                              make_shared<Particle>(300.0, 450.0, CHARGE_VAL),
-                                              make_shared<Particle>(250.0, 400.0, -CHARGE_VAL),
-                                              make_shared<Particle>(150.0, 100.0, -CHARGE_VAL),
+                                              make_shared<Particle>(500.0, 250.0, CHARGE_VAL),
+                                              make_shared<Particle>(300.0, 350.0, CHARGE_VAL),
+                                              make_shared<Particle>(150.0, 400.0, -CHARGE_VAL),
+                                              make_shared<Particle>(650.0, 100.0, -CHARGE_VAL),
                                               make_shared<Particle>(750.0, 500.0, -CHARGE_VAL), };
 
 
@@ -44,9 +44,10 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        Draw_Force_Lines(particles, window);
+
         for(auto &x: particles)
             x->Draw(window);
-        Draw_Force_Lines(particles, window);
         window.display();
     }
 
